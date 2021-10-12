@@ -16,3 +16,5 @@ The model chosen for prediction in our case is the "Random Forest Regressor" alg
 
 ### Visualisation
 The data visualisation is handled with a pyplot from matplotlib with the predicted values against the test set.
+
+### Achieved overall accuracy of 78% in model prediction
