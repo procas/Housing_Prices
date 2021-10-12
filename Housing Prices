@@ -8,6 +8,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.preprocessing import LabelEncoder
 from sklearn import preprocessing
 from sklearn.preprocessing import Imputer
+from sklearn.ensemble import RandomForestRegressor
 ##import datasets
 
 train_set=pd.read_csv("train_housing.csv")
@@ -59,7 +60,6 @@ X_train= imputer.transform(X_train)
 
 
 #Impute values for test data
-
 #Taking care of missing data
                    
 imputer = Imputer(missing_values = 'NaN', strategy = 'mean', axis = 0) #recognises missing values
@@ -67,18 +67,17 @@ imputer = imputer.fit(X_train)
 X_test= imputer.transform(X_test)
 print(X_test)
 # fitting random forest regressor
-from sklearn.ensemble import RandomForestRegressor
+
 regressor=RandomForestRegressor(n_estimators=10, random_state=0)
 regressor.fit(X_train, Y_train)
 Y_pred=regressor.predict(X_test)
-pd.DataFrame(Y_pred).to_csv('prediction.csv')
-print(Y_pred)
+pd.DataFrame(Y_pred).to_csv('prediction.csv') #save locally for reference
 #visualisation
 
 import matplotlib.pyplot as plt
 
-plt.xlabel('Genre', fontsize=5)
-plt.ylabel('No of Movies', fontsize=5)
+plt.xlabel('X_test', fontsize=5)
+plt.ylabel('Y_pred', fontsize=5)
 plt.xticks(X_test[:,37], Y_pred, fontsize=5, rotation=30)
-plt.title('Market Share for Each Genre 1995-2017')
+plt.title('Housing Price Prediction - 2019')
 plt.show()
